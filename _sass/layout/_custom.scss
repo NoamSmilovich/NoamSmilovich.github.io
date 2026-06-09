@@ -903,6 +903,39 @@ body {
   }
 }
 
+/* --------------------------------------------------------------------------
+   Mobile fixes
+   -------------------------------------------------------------------------- */
+/* Keep the theme toggle clear of the hamburger menu button when the nav collapses */
+@media (max-width: 600px) {
+  .greedy-nav .visible-links #theme-toggle {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/* Stack the author profile on phones/tablets: a larger avatar with the
+   name + title below it, instead of the cramped tiny-avatar-beside-name row. */
+@media (max-width: 924px) {
+  .sidebar .author__avatar {
+    display: block;
+    width: auto;
+    margin-bottom: 0.7rem;
+  }
+  .sidebar .author__avatar img {
+    width: 116px;
+    max-width: 116px;
+  }
+  .sidebar .author__content {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .sidebar .author__urls-wrapper { display: block; }
+}
+
 /* Footer: quieter */
 .page__footer {
   border-top: 1px solid var(--global-border-color);
