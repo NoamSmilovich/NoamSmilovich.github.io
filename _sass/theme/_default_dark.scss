@@ -35,20 +35,36 @@ $sidebar-screen-min-width   : 1024px;
 
 /* Dark theme for the site */
 html[data-theme="dark"] {
-    --global-base-color                 : #{$background};
-    --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$background};
-    --global-border-color               : #{$light-gray};
-    --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #fafafa;
-    --global-code-text-color            : #{$darker-gray};
-    --global-fig-caption-color          : #{$light-gray};
-    --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
-    --global-link-color-visited         : #{$link-light};
-    --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$background-light};
-    --global-text-color                 : #{$text};
-    --global-text-color-light           : #f3f3f3;
-    --global-thead-color                : #{$background-lighter};
+    /* Brand accent + surfaces (consumed by _custom.scss) */
+    --accent                            : #818cf8;            /* indigo-400 */
+    --accent-2                          : #a78bfa;            /* violet-400 (card cover 2nd stop) */
+    --accent-hover                      : #a5b4fc;            /* indigo-300 */
+    --accent-contrast                   : #0b0d12;
+    --accent-soft                       : rgba(129, 140, 248, 0.16);
+    --accent-ring                       : rgba(129, 140, 248, 0.45);
+    --shadow                            : rgba(0, 0, 0, 0.6);
+    --surface                           : #15181f;            /* cards */
+    --surface-2                         : #1a1e26;            /* subtle panels */
+    --surface-3                         : #222732;            /* chips */
+    --card-border                       : #2a2f3b;
+    --muted                             : #9aa3b4;            /* secondary text */
+    --masthead-bg                       : rgba(13, 15, 19, 0.80);
+    --hero-glow                         : radial-gradient(60% 120% at 0% 0%, rgba(129, 140, 248, 0.16), transparent 60%);
+
+    --global-base-color                 : #0d0f13;
+    --global-bg-color                   : #0d0f13;            /* page */
+    --global-footer-bg-color            : #0b0d11;
+    --global-border-color               : #262b35;
+    --global-dark-border-color          : #2a2f3b;
+    --global-code-background-color      : #1a1e26;
+    --global-code-text-color            : #e7e9ef;
+    --global-fig-caption-color          : #9aa3b4;
+    --global-link-color                 : #818cf8;
+    --global-link-color-hover           : #a5b4fc;
+    --global-link-color-visited         : #818cf8;
+    --global-masthead-link-color        : #e7e9ef;
+    --global-masthead-link-color-hover  : #a5b4fc;
+    --global-text-color                 : #e7e9ef;
+    --global-text-color-light           : #b7bcc9;
+    --global-thead-color                : #1a1e26;
 }

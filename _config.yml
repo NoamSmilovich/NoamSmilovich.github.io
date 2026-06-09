@@ -12,20 +12,20 @@ site_theme               : "default" # Currently available options are "default"
 title                    : "Noam Smilovich"
 title_separator          : "-"
 name                     : &name "Noam Smilovich"
-description              : &description "personal description"
+description              : &description "Noam Smilovich — Computer Science PhD student at Texas Tech (CI² Lab). Robot learning, reinforcement learning, control & information theory."
 url                      : https://NoamSmilovich.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+repository               : "NoamSmilovich/NoamSmilovich.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "headshot.jpeg"
+  avatar           : "headshot-sm.jpg"
   name             : "Noam Smilovich"
   pronouns         : # example: "she/her"  
-  bio              : "AI Researcher @ Texas Tech"
+  bio              : "PhD Student, Computer Science"
   location         : "Lubbock, Texas"
   employer         : "Texas Tech University"
   uri              : # URL
@@ -83,15 +83,17 @@ publication_category:
   books:
     title: 'Books'
   manuscripts:
-    title: 'Journal Articles'    
+    title: 'Journal Articles'
   conferences:
     title: 'Conference Papers'
+  theses:
+    title: 'Theses'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
-future                   : true
+future                   : false
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
 talkmap_link             : false      #change to true to add link to talkmap on talks page
 comments:
@@ -139,14 +141,18 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Social media default site image
-og_description           :  # Social media default site image description
+og_image                 : "og-image.png"  # 1200x630 social share card
+og_description           : *description
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
+  type                   : Person
+  name                   : "Noam Smilovich"
+  links: # used for schema.org sameAs (Google / Scholar entity linking)
+    - "https://scholar.google.com/citations?user=bF83BPQAAAAJ&hl=en"
+    - "https://orcid.org/0009-0000-4164-9461"
+    - "https://github.com/NoamSmilovich"
+    - "https://www.linkedin.com/in/noam-smilovich"
 
 
 # Analytics
@@ -162,6 +168,7 @@ include:
   - _pages
   - files
 exclude:
+  - cv  # raw LaTeX CV source (the published CV lives at /cv/ via _pages/cv.md)
   - "*.sublime-project"
   - "*.sublime-workspace"
   - .asset-cache
@@ -218,8 +225,7 @@ kramdown:
 # These settings control the types of collections used by the template
 collections:
   teaching:
-    output: true
-    permalink: /:collection/:path/
+    output: false  # no per-course detail pages; the /teaching/ list shows everything
   publications:
     output: true
     permalink: /:collection/:path/

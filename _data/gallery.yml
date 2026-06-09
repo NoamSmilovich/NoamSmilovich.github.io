@@ -1,0 +1,30 @@
+# Photo gallery — order shown top-to-bottom. Every photo has a caption (edit freely).
+# Add/remove/reorder as you like; drop optimized images in /images/gallery/.
+- file: IMG_1473.jpeg
+  caption: "Presenting at ICRA 2025"
+- file: 2025-05-20.jpg
+  caption: "At our research poster"
+- file: IMG_0822.jpeg
+  caption: "My dog on the Walk of Fame"
+- file: 2026-03-07-group.jpg
+  caption: "Cookout with the lab"
+- file: IMG_8104.jpeg
+  caption: "Out on a hike"
+- file: IMG_0253.jpeg
+  caption: "Pickleball with friends"
+- file: IMG_1910.jpeg
+  caption: "Golden hour with my dog"
+- file: IMG_8361.jpeg
+  caption: "Cactus country"
+- file: IMG_7624.jpeg
+  caption: "Halloween pups"
+- file: IMG_9881.jpeg
+  caption: "Mountain roads"
+- file: IMG_8916.jpeg
+  caption: "Rolling hills"
+- file: IMG_8900.jpeg
+  caption: "Summit views"
+- file: IMG_2423.jpeg
+  caption: "On the coast"
+- file: IMG_7171.jpeg
+  caption: "Among the redwoods"

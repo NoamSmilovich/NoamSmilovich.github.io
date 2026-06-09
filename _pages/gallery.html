@@ -1,0 +1,22 @@
+---
+title: "Gallery"
+permalink: /gallery/
+layout: splash
+description: "A few photos — travel, the outdoors, and my dog. Beyond the research."
+---
+
+{% include base_path %}
+
+<h1 class="page__title">Gallery</h1>
+<p class="projects-intro">Travel, the outdoors, my dog, and the occasional pretty picture — life beyond the lab.</p>
+
+<div class="gallery">
+  {% for photo in site.data.gallery %}
+  <figure class="gallery__item">
+    <a href="{{ photo.file | prepend: '/images/gallery/' | relative_url }}" target="_blank" rel="noopener" aria-label="Open photo{% if photo.caption %}: {{ photo.caption }}{% endif %}">
+      <img src="{{ photo.file | prepend: '/images/gallery/' | relative_url }}" alt="{{ photo.caption | default: 'Photo' }}" loading="lazy">
+    </a>
+    {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endfor %}
+</div>

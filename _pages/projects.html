@@ -1,0 +1,38 @@
+---
+title: "Projects"
+permalink: /projects/
+layout: archive
+author_profile: true
+description: "Projects by Noam Smilovich — research tools, demos, and things I build beyond the papers."
+---
+
+{% include base_path %}
+
+<div class="project-list">
+
+  <article class="project">
+    <a class="project__media" href="{{ '/trends/' | relative_url }}" aria-label="Open the Robotics Research Trends dashboard">
+      <img src="{{ '/images/projects/trends-cover.png' | relative_url }}" alt="Biggest-movers chart from the Robotics Research Trends dashboard — Imitation Learning and Sim-to-Real rising, Reinforcement Learning cooling">
+    </a>
+    <div class="project__body">
+      <p class="project__meta">Interactive data dashboard</p>
+      <h2 class="project__title"><a href="{{ '/trends/' | relative_url }}">Robotics Research Trends</a></h2>
+      <p class="project__desc">
+        An interactive dashboard of robotics &amp; control research trends — 3,377 arXiv papers classified by an
+        LLM pipeline, tracking how topics rise, fall, and co-occur over two decades.
+      </p>
+      <div class="project__tags">
+        <span class="chip">Python</span>
+        <span class="chip">LLM pipeline</span>
+        <span class="chip">Plotly</span>
+      </div>
+      <div class="project__links">
+        <a class="btn-accent" href="{{ '/trends/' | relative_url }}">Open live dashboard <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- TODO: under-review robotics paper — add a card here with its demo video(s).
+       Provide the video file/URL + a 1-2 sentence (pre-publication-safe) blurb and I'll wire it in. -->
+
+</div>

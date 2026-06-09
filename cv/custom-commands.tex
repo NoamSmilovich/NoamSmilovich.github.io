@@ -1,0 +1,55 @@
+%-------------------------%
+% Custom commands
+\newcommand{\resumeItem}[1]{
+    \item\small{
+        \parbox[t]{\dimexpr\textwidth-1.5in}{#1} % Use a parbox
+    }
+}
+
+\newcommand{\resumeItemLong}[1]{
+    \item\small{
+        \parbox[t]{\dimexpr\textwidth-1in}{#1} % Use a parbox
+    }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \footnotesize #2 \\ 
+      \textit{\small #3}, \textit{\small #4}
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubheadingTwo}[2]{
+  \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \footnotesize #2 \\ 
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      #1 & {\footnotesize #2} \\
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\small$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}, itemsep=2pt, parsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[itemsep=2pt, parsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+\definecolor{Black}{RGB}{0, 0, 0}
+\definecolor{Blue}{RGB}{50, 50, 255}
+\newcommand{\seticon}[1]{\textcolor{Blue}{\csname #1\endcsname}}

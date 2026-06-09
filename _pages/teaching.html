@@ -3,10 +3,21 @@ layout: archive
 title: "Teaching"
 permalink: /teaching/
 author_profile: true
+description: "Courses Noam Smilovich has taught as a graduate teaching assistant at Texas Tech University."
 ---
 
 {% include base_path %}
 
-{% for post in site.teaching reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+<div class="teach-list">
+  {% assign tcourses = site.teaching | sort: "date" | reverse %}
+  {% for post in tcourses %}
+  <article class="teach">
+    <div class="teach__head">
+      <h2 class="teach__title">{{ post.title }}{% if post.course %} <span class="teach__code">{{ post.course }}</span>{% endif %}</h2>
+      <span class="teach__date">{{ post.date | default: "1900-01-01" | date: "%Y" }}</span>
+    </div>
+    <p class="teach__meta">{{ post.type }} · <em>{{ post.venue }}</em></p>
+    {% if post.content != "" %}<div class="teach__desc">{{ post.content | markdownify }}</div>{% endif %}
+  </article>
+  {% endfor %}
+</div>

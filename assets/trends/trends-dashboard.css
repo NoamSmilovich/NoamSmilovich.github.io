@@ -1,0 +1,51 @@
+/* Robotics Trends dashboard — component styles, scoped to #trends-root so they never touch the host page.
+   Re-theme by overriding these variables in your own stylesheet. Example light theme:
+     #trends-root { --trends-bg:#ffffff; --trends-card:#f5f5f7; --trends-text:#1a1a1a;
+                    --trends-muted:#555a66; --trends-label:#6b7280; --trends-accent:#0077aa;
+                    --trends-border:#d9dce3; --trends-grid:rgba(0,0,0,.08);
+                    --trends-zero:rgba(0,0,0,.30); --trends-title:#111111; }
+   The Plotly charts read --trends-text/-title/-grid/-zero/-accent/-bg, so they retheme with the page. */
+#trends-root {
+  --trends-bg: #0f1117;
+  --trends-card: #171a24;
+  --trends-text: #e6e6e6;
+  --trends-muted: #9aa0b3;
+  --trends-label: #8a8fa3;
+  --trends-accent: #4CC9F0;
+  --trends-border: #2a2e3c;
+  --trends-grid: rgba(255,255,255,.08);
+  --trends-zero: rgba(255,255,255,.30);
+  --trends-title: #ffffff;
+  --trends-font: -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--trends-bg);
+  color: var(--trends-text);
+  font-family: var(--trends-font);
+  padding: 24px;
+  box-sizing: border-box;
+}
+#trends-root *, #trends-root *::before, #trends-root *::after { box-sizing: border-box; }
+#trends-root h1 { text-align:center; color:var(--trends-accent); margin:0 0 4px; }
+#trends-root .subtitle { text-align:center; color:var(--trends-muted); margin:0 0 24px; font-size:14px; }
+#trends-root .wrap { max-width:1280px; margin:auto; display:flex; flex-direction:column; gap:24px; }
+#trends-root .card { background:var(--trends-card); border-radius:12px; padding:16px 20px; box-shadow:0 4px 20px rgba(0,0,0,.5); }
+#trends-root .label { font-size:12px; font-weight:600; color:var(--trends-label); text-transform:uppercase; letter-spacing:1px; margin:0 0 10px; }
+#trends-root .controls { display:flex; flex-wrap:wrap; gap:18px 28px; align-items:center; margin-bottom:8px; }
+#trends-root .ctrl { display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--trends-muted); }
+#trends-root .ctrl b { color:var(--trends-accent); font-weight:600; }
+#trends-root select, #trends-root input[type=text] { background:var(--trends-bg); color:var(--trends-text); border:1px solid var(--trends-border); border-radius:6px; padding:6px 8px; font-size:13px; }
+#trends-root input[type=range] { width:240px; accent-color:var(--trends-accent); }
+#trends-root .seg { display:inline-flex; border:1px solid var(--trends-border); border-radius:6px; overflow:hidden; }
+#trends-root .seg button { background:var(--trends-bg); color:var(--trends-muted); border:none; padding:6px 14px; cursor:pointer; font-size:13px; }
+#trends-root .seg button.on { background:var(--trends-accent); color:var(--trends-bg); font-weight:600; }
+#trends-root .btn { background:var(--trends-bg); color:var(--trends-muted); border:1px solid var(--trends-border); border-radius:6px; padding:6px 12px; cursor:pointer; font-size:13px; }
+#trends-root .btn:hover { color:var(--trends-accent); border-color:var(--trends-accent); }
+#trends-root .rowhead { display:flex; justify-content:space-between; align-items:center; }
+#trends-root .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media (max-width:900px){ #trends-root .grid2 { grid-template-columns:1fr; } }
+#trends-root table.pivot { border-collapse:collapse; width:100%; font-size:12px; }
+#trends-root table.pivot th, #trends-root table.pivot td { padding:4px 8px; text-align:right; border-bottom:1px solid var(--trends-border); white-space:nowrap; }
+#trends-root table.pivot th { color:var(--trends-label); position:sticky; top:0; background:var(--trends-card); }
+#trends-root table.pivot td.kw, #trends-root table.pivot th.kw { text-align:left; position:sticky; left:0; background:var(--trends-card); color:var(--trends-text); max-width:260px; overflow:hidden; text-overflow:ellipsis; }
+#trends-root table.pivot td.tot { font-weight:700; color:var(--trends-accent); }
+#trends-root table.pivot .sel { background:rgba(76,201,240,.12); }
+#trends-root .tablewrap { max-height:460px; overflow:auto; border:1px solid var(--trends-border); border-radius:8px; }

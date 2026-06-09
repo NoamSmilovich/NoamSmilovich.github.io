@@ -1,0 +1,34 @@
+{%- comment -%}
+  Renders a single publication as a wide text card. Expects `post` to be a
+  _publications item. base_path is already in scope from the parent page.
+{%- endcomment -%}
+{% assign ptype = '' %}
+{% if post.category == 'conferences' %}{% assign ptype = 'Conference Paper' %}
+{% elsif post.category == 'manuscripts' %}{% assign ptype = 'Journal Article' %}
+{% elsif post.category == 'theses' %}{% assign ptype = 'Thesis' %}
+{% elsif post.category == 'books' %}{% assign ptype = 'Book' %}{% endif %}
+<article class="pub-card">
+  <p class="pub-card__meta">{% if ptype != '' %}{{ ptype }} · {% endif %}{{ post.date | default: "1900-01-01" | date: "%Y" }}</p>
+
+  <h3 class="pub-card__title">
+    <a href="{% if post.paperurl %}{{ post.paperurl }}{% else %}{{ base_path }}{{ post.url }}{% endif %}">{{ post.title }}</a>
+  </h3>
+
+  {% if post.authors %}
+    <p class="pub-card__authors">{{ post.authors | replace: 'N. Smilovich', '<span class="me">N. Smilovich</span>' }}</p>
+  {% endif %}
+  {% if post.venue %}<p class="pub-card__venue">{{ post.venue }}</p>{% endif %}
+
+  <div class="pub-card__links">
+    {% if post.paperurl %}
+      {% if post.paperurl contains "arxiv" %}
+        <a href="{{ post.paperurl }}"><i class="ai ai-arxiv" aria-hidden="true"></i> arXiv</a>
+      {% elsif post.category == 'theses' %}
+        <a href="{{ post.paperurl }}"><i class="fas fa-file-lines" aria-hidden="true"></i> Thesis</a>
+      {% else %}
+        <a href="{{ post.paperurl }}"><i class="fas fa-file-lines" aria-hidden="true"></i> Paper</a>
+      {% endif %}
+    {% endif %}
+    {% if post.slidesurl %}<a href="{{ post.slidesurl }}"><i class="fas fa-display" aria-hidden="true"></i> Slides</a>{% endif %}
+  </div>
+</article>

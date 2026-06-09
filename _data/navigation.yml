@@ -15,8 +15,11 @@ main:
   #   url: /talks/    
 
   - title: "Teaching"
-    url: /teaching/    
-    
+    url: /teaching/
+
+  - title: "Projects"
+    url: /projects/
+
   # - title: "Portfolio"
   #   url: /portfolio/
         
@@ -25,6 +28,9 @@ main:
     
   - title: "CV"
     url: /cv/
+
+  - title: "Gallery"
+    url: /gallery/
     
   # - title: "CV"
   #   url: /cv-json/

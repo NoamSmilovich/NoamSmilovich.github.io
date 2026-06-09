@@ -1,5 +1,10 @@
 {
-	"name": "OOjs UI icon academic-progressive",
+	"name": "Noam Smilovich",
+	"short_name": "N. Smilovich",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#0d0f13",
+	"background_color": "#ffffff",
 	"icons": [
 		{
 			"src": "/images/favicon-192x192.png",
@@ -9,7 +14,8 @@
 		{
 			"src": "/images/favicon-512x512.png",
 			"sizes": "512x512",
-			"type": "image/png"
+			"type": "image/png",
+			"purpose": "any maskable"
 		}
 	]
 }

@@ -1,0 +1,13 @@
+# Homepage "News" feed. Newest first. `text` is rendered as Markdown
+# (so you can use **bold**, *italics*, and [links](https://...)).
+# Edit / add entries freely — this drives the News section on the home page.
+# (Awards live separately in _data/awards.yml so they persist as a list.)
+
+- date: "Aug 2025"
+  text: "Taught **Special Topics in CS: Generative AI** and a senior capstone project at Texas Tech University."
+
+- date: "Feb 2025"
+  text: "Our paper *Acoustic Wave Manipulation Through Sparse Robotic Actuation* was accepted to **ICRA 2025**. [Read it on arXiv](https://arxiv.org/abs/2502.08784)."
+
+- date: "Jan 2025"
+  text: "Started my PhD in the **CI² Lab** at Texas Tech, advised by [Dr. Stas Tiomkin](https://www.depts.ttu.edu/cs/faculty/Stas_tiomkin/stastiomkin.php)."

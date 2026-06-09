@@ -1,0 +1,192 @@
+---
+title: "Trends"
+permalink: /trends/
+layout: splash
+excerpt: "An interactive dashboard of robotics & control research trends from arXiv."
+---
+
+<!-- Robotics Research Trends dashboard (self-contained, themed to match the site) -->
+<link rel="stylesheet" href="{{ '/assets/trends/trends-dashboard.css' | relative_url }}">
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+<style>
+  /* Re-theme the dashboard to the site's tokens (light + dark aware). The renderer
+     reads these variables at load, so the chrome AND the Plotly charts match. */
+  #trends-root {
+    --trends-bg: transparent;
+    --trends-card: var(--surface);
+    --trends-text: var(--global-text-color);
+    --trends-muted: var(--muted);
+    --trends-label: var(--muted);
+    --trends-accent: var(--accent);
+    --trends-border: var(--card-border);
+    --trends-grid: rgba(0, 0, 0, 0.10);
+    --trends-zero: rgba(0, 0, 0, 0.32);
+    --trends-title: var(--global-text-color);
+    --trends-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 0;
+  }
+  html[data-theme="dark"] #trends-root {
+    --trends-grid: rgba(255, 255, 255, 0.10);
+    --trends-zero: rgba(255, 255, 255, 0.34);
+  }
+  #trends-root h1 {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 2rem;
+    color: var(--global-text-color);
+  }
+  #trends-root .card {
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+    border-radius: 14px;
+  }
+  /* methodology card */
+  #trends-root .method-intro {
+    color: var(--global-text-color);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+  #trends-root .method-steps {
+    margin: 0 0 14px;
+    padding-left: 1.3em;
+    color: var(--global-text-color);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  #trends-root .method-steps li { margin-bottom: 7px; }
+  #trends-root .method-steps b { color: var(--accent); font-weight: 600; }
+  #trends-root .method-caveat {
+    color: var(--trends-muted);
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin: 0 0 6px;
+  }
+  #trends-root .method-caveat:last-child { margin-bottom: 0; }
+  /* visible focus for keyboard users on every dashboard control */
+  #trends-root :is(select, input, button, .seg button, .btn):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* mobile: the dashboard had no breakpoints — keep controls/sliders in-bounds */
+  @media (max-width: 600px) {
+    #trends-root .card { padding: 14px; }
+    #trends-root input[type="range"] { width: 100%; }
+    #trends-root .controls { gap: 12px 16px; }
+    #trends-root h1 { font-size: 1.5rem; }
+    #trends-root .subtitle { font-size: 12px; }
+  }
+</style>
+
+<div id="trends-root">
+  <h1>Robotics Research Trends</h1>
+  <p class="subtitle"><span data-meta="npapers"></span> papers · arXiv cs.RO + eess.SY · <span data-meta="daterange"></span> · interactive</p>
+  <div class="wrap">
+
+    <!-- How this analysis works (methodology) — shown first, before the results -->
+    <div class="card method-card">
+      <p class="label">📐 How this analysis works</p>
+      <p class="method-intro">A data-driven map of what robotics &amp; control research is actually working on — built from <b data-meta="npapers"></b> arXiv papers (<b>cs.RO</b> Robotics + <b>eess.SY</b> Systems &amp; Control) spanning <b data-meta="daterange"></b>. An automated pipeline collects, reads, categorizes, and de-duplicates the literature, then tracks how topics rise and fall over time.</p>
+      <ol class="method-steps">
+        <li><b>Collect.</b> Papers are pulled from arXiv (Robotics + Systems &amp; Control) for a curated set of leading robot-learning groups.</li>
+        <li><b>Classify.</b> A large language model reads each paper's title and abstract and tags it across five taxonomies — research domains, algorithms, network architectures, simulators/frameworks, and hardware/morphologies.</li>
+        <li><b>Mine the full text.</b> To catch tooling an abstract leaves out, each paper's arXiv LaTeX source is downloaded and scanned for known simulators and frameworks.</li>
+        <li><b>Add affiliations.</b> Each paper is matched against OpenAlex to label its authors as academia or industry — this powers the academia-vs-industry comparison.</li>
+        <li><b>Consolidate the vocabulary.</b> A second LLM pass folds synonyms and spelling variants into a single canonical term per concept (e.g. "RL" &rarr; "Reinforcement Learning"), so one trend isn't split across aliases.</li>
+        <li><b>Visualize.</b> The cleaned data drives the interactive views below — how topics co-occur, which are heating up or cooling down, a lifecycle map, an academia-vs-industry split, and a year-by-year explorer.</li>
+      </ol>
+      <p class="method-caveat" data-meta-html="sector_note"></p>
+      <p class="method-caveat">Coverage reflects a curated set of leading robot-learning groups — a focused look at the field's frontier, not an unbiased sample of all robotics research.</p>
+    </div>
+
+    <!-- GLOBAL: spans all categories, no per-category controls -->
+    <div class="card">
+      <div class="rowhead">
+        <p class="label">🕸️ How topics connect · linked when papers use both (thicker = more; hover a line for the count) · node size = papers using the topic</p>
+        <div class="ctrl" style="flex-direction:row; align-items:center; gap:8px;">Nodes <b id="nodeLabel">16</b>
+          <input type="range" id="nodeSlider" min="8" max="40" value="16">
+        </div>
+      </div>
+      <div id="coocChart"></div>
+    </div>
+
+    <!-- Category + window selectors drive the two panels below -->
+    <div class="card">
+      <div class="controls">
+        <div class="ctrl">Category — drives the panels below
+          <select id="catSel" aria-label="Taxonomy category"></select>
+        </div>
+        <div class="ctrl">Recent window
+          <div class="seg" id="recentSeg">
+            <button data-recent="3" class="on">3 yrs</button>
+            <button data-recent="5">5 yrs</button>
+            <button data-recent="7">7 yrs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="label">🔥 Biggest movers · recent window vs earlier (share-point change) — what's heating up &amp; cooling down</p>
+      <div id="moversChart"></div>
+    </div>
+
+    <div class="card">
+      <p class="label">🌀 Lifecycle map · every topic by prominence vs. momentum (bubble = total papers) — hover any point</p>
+      <div id="lifecycleChart"></div>
+    </div>
+
+    <div class="card">
+      <p class="label">🏛️ Academia vs. industry · which topics each sector leans toward (share difference; via OpenAlex affiliations)</p>
+      <div id="sectorChart"></div>
+    </div>
+
+    <!-- Explorer controls: only affect the explorer + pivot below -->
+    <div class="card">
+      <div class="controls">
+        <div class="ctrl">View
+          <div class="seg" id="modeSeg">
+            <button data-mode="cum" class="on">Cumulative</button>
+            <button data-mode="per">Per-year</button>
+          </div>
+        </div>
+        <div class="ctrl">Measure
+          <div class="seg" id="normSeg">
+            <button data-norm="count" class="on">Count</button>
+            <button data-norm="share">% share</button>
+          </div>
+        </div>
+        <div class="ctrl">Year: <b id="yearLabel"></b>
+          <input type="range" id="yearSlider" min="0" max="1" value="1">
+        </div>
+        <div class="ctrl">Top <b id="topNLabel">15</b>
+          <input type="range" id="topNSlider" min="5" max="40" value="15">
+        </div>
+        <div class="ctrl">Filter keywords
+          <input type="text" id="kwFilter" placeholder="e.g. diffusion" aria-label="Filter keywords">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="label">🔎 Explorer · ranked snapshot at the selected year + trend over time</p>
+      <div class="grid2">
+        <div id="barChart"></div>
+        <div id="lineChart"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="rowhead">
+        <p class="label">📋 Pivot table · keyword × year (current view); selected year highlighted</p>
+        <button class="btn" id="csvBtn">⬇ Export CSV</button>
+      </div>
+      <div class="tablewrap"><div id="pivotTable"></div></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="{{ '/assets/trends/trends-dashboard.js' | relative_url }}" data-src="{{ '/assets/trends/dashboard_data.json' | relative_url }}"></script>

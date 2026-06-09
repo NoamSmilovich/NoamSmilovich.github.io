@@ -2,6 +2,41 @@
 
 <!-- start custom head snippets -->
 
+<!-- Web fonts: Inter (body/UI) + Space Grotesk (display headings) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+
+<!-- Apply the persisted/preferred theme before first paint (prevents a flash of the
+     wrong theme) and keep the browser address-bar theme-color in sync with it. -->
+<script>
+  (function () {
+    var LIGHT = "#ffffff", DARK = "#0d0f13";
+    function syncMeta(isDark) {
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (!m) { m = document.createElement("meta"); m.setAttribute("name", "theme-color"); document.head.appendChild(m); }
+      m.setAttribute("content", isDark ? DARK : LIGHT);
+    }
+    try {
+      var t = localStorage.getItem("theme");
+      var dark = t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      if (dark) { document.documentElement.setAttribute("data-theme", "dark"); }
+      syncMeta(dark);
+    } catch (e) {}
+    // _main.js flips html[data-theme] on toggle click; re-sync the meta afterwards.
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.getElementById("theme-toggle");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          setTimeout(function () {
+            syncMeta(document.documentElement.getAttribute("data-theme") === "dark");
+          }, 0);
+        });
+      }
+    });
+  })();
+</script>
+
 <!-- Support for Academicons -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
 
@@ -13,5 +48,21 @@
 <link rel="manifest" href="{{ base_path }}/images/manifest.json"/>
 <link rel="icon" href="/images/favicon.ico"/>
 <meta name="theme-color" content="#ffffff"/>
+
+<!-- ScholarlyArticle structured data on publication pages (for Google / Scholar) -->
+{% if page.collection == 'publications' %}
+{% if page.paperurl %}{% assign _puburl = page.paperurl %}{% else %}{% assign _puburl = page.url | prepend: site.url %}{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": {{ page.date | date: '%Y-%m-%d' | jsonify }},
+  "url": {{ _puburl | jsonify }}{% if page.venue %},
+  "publisher": {{ page.venue | jsonify }}{% endif %}{% if page.authors %},
+  "author": [{% assign _aus = page.authors | split: ", " %}{% for a in _aus %}{"@type":"Person","name":{{ a | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+}
+</script>
+{% endif %}
 
 <!-- end custom head snippets -->
