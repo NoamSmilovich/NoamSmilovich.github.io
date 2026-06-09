@@ -36,12 +36,12 @@ $sidebar-screen-min-width   : 1024px;
 /* Dark theme for the site */
 html[data-theme="dark"] {
     /* Brand accent + surfaces (consumed by _custom.scss) */
-    --accent                            : #818cf8;            /* indigo-400 */
-    --accent-2                          : #a78bfa;            /* violet-400 (card cover 2nd stop) */
-    --accent-hover                      : #a5b4fc;            /* indigo-300 */
+    --accent                            : #60a5fa;            /* blue-400 */
+    --accent-2                          : #93c5fd;            /* blue-300 (card cover 2nd stop) */
+    --accent-hover                      : #93c5fd;            /* blue-300 */
     --accent-contrast                   : #0b0d12;
-    --accent-soft                       : rgba(129, 140, 248, 0.16);
-    --accent-ring                       : rgba(129, 140, 248, 0.45);
+    --accent-soft                       : rgba(96, 165, 250, 0.16);
+    --accent-ring                       : rgba(96, 165, 250, 0.45);
     --shadow                            : rgba(0, 0, 0, 0.6);
     --surface                           : #15181f;            /* cards */
     --surface-2                         : #1a1e26;            /* subtle panels */
@@ -49,7 +49,7 @@ html[data-theme="dark"] {
     --card-border                       : #2a2f3b;
     --muted                             : #9aa3b4;            /* secondary text */
     --masthead-bg                       : rgba(13, 15, 19, 0.80);
-    --hero-glow                         : radial-gradient(60% 120% at 0% 0%, rgba(129, 140, 248, 0.16), transparent 60%);
+    --hero-glow                         : radial-gradient(60% 120% at 0% 0%, rgba(96, 165, 250, 0.16), transparent 60%);
 
     --global-base-color                 : #0d0f13;
     --global-bg-color                   : #0d0f13;            /* page */
@@ -59,11 +59,11 @@ html[data-theme="dark"] {
     --global-code-background-color      : #1a1e26;
     --global-code-text-color            : #e7e9ef;
     --global-fig-caption-color          : #9aa3b4;
-    --global-link-color                 : #818cf8;
-    --global-link-color-hover           : #a5b4fc;
-    --global-link-color-visited         : #818cf8;
+    --global-link-color                 : #60a5fa;
+    --global-link-color-hover           : #93c5fd;
+    --global-link-color-visited         : #60a5fa;
     --global-masthead-link-color        : #e7e9ef;
-    --global-masthead-link-color-hover  : #a5b4fc;
+    --global-masthead-link-color-hover  : #93c5fd;
     --global-text-color                 : #e7e9ef;
     --global-text-color-light           : #b7bcc9;
     --global-thead-color                : #1a1e26;

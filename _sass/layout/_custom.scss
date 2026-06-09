@@ -916,24 +916,38 @@ body {
   }
 }
 
-/* Stack the author profile on phones/tablets: a larger avatar with the
-   name + title below it, instead of the cramped tiny-avatar-beside-name row. */
+/* On phones/tablets: a larger avatar with the name + title stacked beneath it
+   on the left, and the contact links beside them on the right. */
 @media (max-width: 924px) {
+  .sidebar .author-profile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.4rem;
+    align-items: start;
+  }
   .sidebar .author__avatar {
+    grid-column: 1;
+    grid-row: 1;
     display: block;
     width: auto;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.6rem;
   }
   .sidebar .author__avatar img {
     width: 116px;
     max-width: 116px;
   }
   .sidebar .author__content {
+    grid-column: 1;
+    grid-row: 2;
     display: block;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
-  .sidebar .author__urls-wrapper { display: block; }
+  .sidebar .author__urls-wrapper {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    display: block;
+    align-self: center;
+  }
 }
 
 /* Footer: quieter */
